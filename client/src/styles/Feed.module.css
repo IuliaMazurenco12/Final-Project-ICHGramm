@@ -1,0 +1,53 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 404px));
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Блок «You've seen all the updates»  */
+
+.caughtUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 60px 0 40px;
+  text-align: center;
+}
+
+.caughtUpIcon {
+  margin-bottom: 10px;
+}
+
+.caughtUpTitle {
+  font-size: 16px;
+}
+
+.caughtUpText {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* Загрузка, ошибка, пусто  */
+
+.status {
+  padding: 60px 0;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.emptyTitle {
+  margin-bottom: 8px;
+  color: var(--text-main);
+  font-size: 18px;
+  font-weight: 600;
+}

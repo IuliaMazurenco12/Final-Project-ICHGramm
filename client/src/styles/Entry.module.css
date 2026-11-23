@@ -1,0 +1,147 @@
+.stage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 16px;
+}
+
+.showcase {
+  width: 380px;
+  height: auto;
+}
+
+.column {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 40px 32px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+}
+
+.brand {
+  width: 190px;
+  margin-bottom: 24px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field {
+  width: 100%;
+  height: 38px;
+  padding: 0 8px;
+  font-size: 12px;
+  background: var(--field-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 3px;
+  outline: none;
+}
+
+.field:focus {
+  border-color: #a8a8a8;
+}
+
+.primaryBtn {
+  height: 32px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.primaryBtn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.primaryBtn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 18px 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-soft);
+}
+.errorText {
+  margin: 8px 0;
+  color: var(--danger);
+  font-size: 14px;
+  text-align: center;
+}
+.quietLink {
+  margin-top: 40px;
+  color: var(--link-deep);
+  font-size: 12px;
+}
+
+.panelSmall {
+  padding: 22px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid var(--border-soft);
+}
+
+.accentLink {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* серый жирный подзаголовок «Sign up to see photos and videos from your friends */
+.tagline {
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/*маленький красный текст под полем*/
+.fieldError {
+  margin-top: 4px;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.finePrint {
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.finePrintLink {
+  color: var(--link-deep);
+}

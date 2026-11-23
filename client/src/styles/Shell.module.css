@@ -1,0 +1,111 @@
+/*  Боковое меню  */
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  flex-shrink: 0;
+  width: 245px;
+  height: 100vh;
+  padding: 28px 12px;
+  background: #ffffff;
+  border-right: 1px solid var(--border-soft);
+}
+
+.logoLink {
+  display: inline-block;
+  margin: 0 0 32px 13px;
+}
+
+.logo {
+  display: block;
+  width: 97px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 220px;
+  height: 48px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-main);
+  font-size: 16px;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.menuItem:hover {
+  background: #f2f2f2;
+}
+
+.menuItemActive {
+  font-weight: 700;
+}
+
+.profileItem {
+  margin-top: 38px;
+}
+
+/*Подвал */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 46px;
+  padding: 32px 16px 48px;
+  background: #ffffff;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.footerLink {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/*  Каркас*/
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.workspace {
+  display: flex;
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 32px;
+}

@@ -1,0 +1,90 @@
+.card {
+  width: 100%;
+  max-width: 404px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+/*  Шапка */
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+/*градиентное кольцо вокруг аватара*/
+.ring {
+  display: flex;
+  padding: 2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7);
+}
+
+.ring img,
+.ring span {
+  border: 2px solid #ffffff;
+}
+
+.author {
+  font-weight: 600;
+}
+
+.age {
+  color: var(--text-muted);
+}
+
+/*Фото*/
+
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  background: var(--field-bg);
+}
+
+/*  Лайк и подпись  */
+
+.actions {
+  display: flex;
+  margin: 12px 0 6px;
+}
+
+.heartBtn {
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-main);
+  transition: transform 0.1s;
+}
+
+.heartBtn:active {
+  transform: scale(0.85);
+}
+
+.heartFilled {
+  color: var(--danger);
+}
+
+.likes {
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+.captionAuthor {
+  margin-right: 4px;
+  font-weight: 600;
+}

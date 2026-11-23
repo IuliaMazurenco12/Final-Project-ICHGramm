@@ -1,0 +1,17 @@
+.badge {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--field-bg);
+  border: 1px solid var(--border-soft);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}

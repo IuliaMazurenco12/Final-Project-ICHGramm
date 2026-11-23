@@ -1,0 +1,43 @@
+.sheet {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ffffff;
+  animation: popIn 0.15s ease-out;
+}
+
+.option {
+  height: 48px;
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  background: none;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+.option:first-child {
+  border-top: none;
+}
+
+.option:hover {
+  background: #fafafa;
+}
+
+.danger {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
