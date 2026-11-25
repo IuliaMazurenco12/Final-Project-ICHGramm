@@ -5,6 +5,7 @@ import httpClient from '../api/httpClient';
 import { useCurrentUser } from '../context/CurrentUserContext';
 import useHeartToggle from '../hooks/useHeartToggle';
 import AvatarBadge from './AvatarBadge';
+import RemarksSection from './RemarksSection';
 import ActionSheet from './ActionSheet';
 import describeAge from '../utils/describeAge';
 import formatLikes from '../utils/formatLikes';
@@ -96,6 +97,58 @@ const PublicationView = ({ publication, isStandalone = false, onUpdated, onDelet
     { label: 'Copy link', onSelect: copyLink },
   ];
 
+  const captionBlock = (
+    <div className={styles.body}>
+      {isEditing ? (
+        <div className={styles.editor}>
+          <textarea
+            className={styles.editField}
+            value={draftCaption}
+            maxLength={CAPTION_LIMIT}
+            onChange={(event) => setDraftCaption(event.target.value)}
+            autoFocus
+          />
+          <div className={styles.editBar}>
+            <span className={styles.counter}>
+              {draftCaption.length}/{CAPTION_LIMIT}
+            </span>
+            <button
+              type="button"
+              className={styles.textBtn}
+              onClick={() => setIsEditing(false)}
+              disabled={isBusy}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className={`${styles.textBtn} ${styles.textBtnAccent}`}
+              onClick={handleSaveCaption}
+              disabled={isBusy}
+            >
+              {isBusy ? 'Saving...' : 'Save'}
+            </button>
+          </div>
+        </div>
+      ) : (
+        caption && (
+          <div className={styles.captionRow}>
+            <AvatarBadge src={author.avatar} size={32} alt="" />
+            <div>
+              <p className={styles.captionText}>
+                <Link to={profileLink} className={styles.author}>
+                  {author.username}
+                </Link>{' '}
+                {caption}
+              </p>
+              <p className={styles.age}>{describeAge(createdAt)}</p>
+            </div>
+          </div>
+        )
+      )}
+    </div>
+  );
+
   return (
     <article className={styles.view}>
       <div className={styles.media}>
@@ -128,77 +181,29 @@ const PublicationView = ({ publication, isStandalone = false, onUpdated, onDelet
           )}
         </header>
 
-        <div className={styles.body}>
-          {isEditing ? (
-            <div className={styles.editor}>
-              <textarea
-                className={styles.editField}
-                value={draftCaption}
-                maxLength={CAPTION_LIMIT}
-                onChange={(event) => setDraftCaption(event.target.value)}
-                autoFocus
-              />
-              <div className={styles.editBar}>
-                <span className={styles.counter}>
-                  {draftCaption.length}/{CAPTION_LIMIT}
-                </span>
-                <button
-                  type="button"
-                  className={styles.textBtn}
-                  onClick={() => setIsEditing(false)}
-                  disabled={isBusy}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.textBtn} ${styles.textBtnAccent}`}
-                  onClick={handleSaveCaption}
-                  disabled={isBusy}
-                >
-                  {isBusy ? 'Saving...' : 'Save'}
-                </button>
-              </div>
-            </div>
-          ) : (
-            caption && (
-              <div className={styles.captionRow}>
-                <AvatarBadge src={author.avatar} size={32} alt="" />
-                <div>
-                  <p className={styles.captionText}>
-                    <Link to={profileLink} className={styles.author}>
-                      {author.username}
-                    </Link>{' '}
-                    {caption}
-                  </p>
-                  <p className={styles.age}>{describeAge(createdAt)}</p>
-                </div>
-              </div>
-            )
-          )}
-        </div>
-
-        <footer className={styles.foot}>
-          <button
-            type="button"
-            className={styles.heartBtn}
-            onClick={toggleHeart}
-            aria-label={liked ? 'Unlike' : 'Like'}
-          >
-            {liked ? (
-              <IoHeart size={24} className={styles.heartFilled} />
-            ) : (
-              <IoHeartOutline size={24} />
+        <RemarksSection publicationId={_id} intro={captionBlock}>
+          <footer className={styles.foot}>
+            <button
+              type="button"
+              className={styles.heartBtn}
+              onClick={toggleHeart}
+              aria-label={liked ? 'Unlike' : 'Like'}
+            >
+              {liked ? (
+                <IoHeart size={24} className={styles.heartFilled} />
+              ) : (
+                <IoHeartOutline size={24} />
+              )}
+            </button>
+            <p className={styles.likes}>{formatLikes(heartsCount)}</p>
+            <p className={styles.age}>{describeAge(createdAt)}</p>
+            {notice && (
+              <p className={styles.notice} role="status">
+                {notice}
+              </p>
             )}
-          </button>
-          <p className={styles.likes}>{formatLikes(heartsCount)}</p>
-          <p className={styles.age}>{describeAge(createdAt)}</p>
-          {notice && (
-            <p className={styles.notice} role="status">
-              {notice}
-            </p>
-          )}
-        </footer>
+          </footer>
+        </RemarksSection>
       </div>
 
       {isMenuOpen && <ActionSheet actions={menuActions} onClose={() => setIsMenuOpen(false)} />}

@@ -7,6 +7,8 @@ import profileRoutes from './routes/profileRoutes.js';
 import publicationRoutes from './routes/publicationRoutes.js';
 import heartRoutes from './routes/heartRoutes.js';
 import subscriptionRoutes from './routes/subscriptionRoutes.js';
+import remarkRoutes from './routes/remarkRoutes.js';
+
 
 const app = express();
 
@@ -24,6 +26,7 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/publications', publicationRoutes);
 app.use('/api/hearts', heartRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
+app.use('/api/remarks', remarkRoutes);
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {

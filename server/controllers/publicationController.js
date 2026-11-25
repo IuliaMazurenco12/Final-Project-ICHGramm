@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import Publication from '../models/Publication.js';
 import Account from '../models/Account.js';
 import Heart from '../models/Heart.js';
+import Subscription from '../models/Subscription.js';
+import Remark from '../models/Remark.js';
 import imageToBase64 from '../utils/imageToBase64.js';
 import withHeartStats from '../utils/withHeartStats.js';
 
@@ -10,11 +12,20 @@ const AUTHOR_FIELDS = 'username fullName avatar';
 // GET /api/publications
 export const getAllPublications = async (req, res) => {
   try {
-    const publications = await Publication.find()
-      .sort({ createdAt: -1 })
-      .populate('author', AUTHOR_FIELDS);
+    const [publications, mySubscriptions] = await Promise.all([
+      Publication.find().sort({ createdAt: -1 }).populate('author', AUTHOR_FIELDS),
+      Subscription.find({ follower: req.user._id }).select('following'),
+    ]);
 
-    res.json({ publications: await withHeartStats(publications, req.user._id) });
+    const followingIds = new Set(mySubscriptions.map((item) => item.following.toString()));
+    const withStats = await withHeartStats(publications, req.user._id);
+
+    res.json({
+      publications: withStats.map((publication) => ({
+        ...publication,
+        authorFollowedByMe: followingIds.has(publication.author._id.toString()),
+      })),
+    });
   } catch (error) {
     console.error('Get all publications error:', error);
     res.status(500).json({ message: 'Server error while loading publications.' });
@@ -108,7 +119,7 @@ export const createPublication = async (req, res) => {
 
     const publication = await Publication.create({
       author: req.user._id,
-    image: await imageToBase64(req.file),
+      image: await imageToBase64(req.file),
       caption: req.body.caption || '',
     });
 
@@ -152,7 +163,7 @@ export const updatePublication = async (req, res) => {
     }
 
     if (req.file) {
-publication.image = await imageToBase64(req.file);
+      publication.image = await imageToBase64(req.file);
     }
 
     await publication.save();
@@ -191,6 +202,7 @@ export const deletePublication = async (req, res) => {
     }
 
     await Heart.deleteMany({ publication: id });
+    await Remark.deleteMany({ publication: id });
     await publication.deleteOne();
 
     res.json({ message: 'Publication deleted.', id });

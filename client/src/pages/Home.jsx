@@ -40,6 +40,16 @@ const Home = () => {
     };
   }, []);
 
+  const handleFollowed = (authorId) => {
+    setPublications((prev) =>
+      prev.map((publication) =>
+        publication.author._id === authorId
+          ? { ...publication, authorFollowedByMe: true }
+          : publication
+      )
+    );
+  };
+
   if (isLoading) {
     return <p className={styles.status}>Loading...</p>;
   }
@@ -61,7 +71,11 @@ const Home = () => {
     <section className={styles.feed}>
       <div className={styles.grid}>
         {publications.map((publication) => (
-          <PublicationCard key={publication._id} publication={publication} />
+          <PublicationCard
+            key={publication._id}
+            publication={publication}
+            onFollowed={handleFollowed}
+          />
         ))}
       </div>
 
